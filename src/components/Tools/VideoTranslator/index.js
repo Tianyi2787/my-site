@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { translateText } from '../../../services/translationService';
 import './VideoTranslator.css';
 
 const VideoTranslator = () => {
@@ -23,8 +24,8 @@ const VideoTranslator = () => {
         throw new Error('请输入有效的YouTube视频链接');
       }
 
-      // 创建嵌入式播放器
-      const embedUrl = `https://www.youtube.com/embed/${videoId}?cc_load_policy=1&cc_lang_pref=zh-CN`;
+      // 创建嵌入式播放器，添加中文字幕参数
+      const embedUrl = `https://www.youtube.com/embed/${videoId}?cc_load_policy=1&cc_lang_pref=zh-Hans&hl=zh-CN`;
       const playerContainer = document.getElementById('video-player');
       playerContainer.innerHTML = `
         <iframe
@@ -36,6 +37,30 @@ const VideoTranslator = () => {
           allowfullscreen
         ></iframe>
       `;
+
+      // 监听字幕变化并翻译
+      const observer = new MutationObserver(async (mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            const captionText = mutation.addedNodes[0].textContent;
+            if (captionText) {
+              const translatedText = await translateText(captionText);
+              // 更新字幕显示
+              mutation.addedNodes[0].textContent = translatedText;
+            }
+          }
+        }
+      });
+
+      // 开始观察字幕变化
+      const captionsContainer = document.querySelector('.ytp-caption-window-container');
+      if (captionsContainer) {
+        observer.observe(captionsContainer, {
+          childList: true,
+          subtree: true
+        });
+      }
+
     } catch (err) {
       setError(err.message);
     } finally {
@@ -81,7 +106,7 @@ const VideoTranslator = () => {
 
       <div id="video-player" className="video-player">
         <div className="placeholder">
-          <p>在上方输入YouTube视频链接以开始翻译</p>
+          <p>在上方输入YouTube��频链接以开始翻译</p>
           <small>支持自动字幕翻译功能</small>
         </div>
       </div>
@@ -91,8 +116,8 @@ const VideoTranslator = () => {
         <ol>
           <li>输入YouTube视频链接</li>
           <li>点击加载视频</li>
-          <li>在视频播放器中点击CC按钮开启字幕</li>
-          <li>选择中文字幕（如果可用）</li>
+          <li>视频加载后会自动开启中文字幕</li>
+          <li>如果字幕未显示，请点击视频播放器中的CC按钮</li>
         </ol>
       </div>
     </div>
