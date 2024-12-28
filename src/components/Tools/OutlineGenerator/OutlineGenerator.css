@@ -1,0 +1,131 @@
+.outline-generator {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.url-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.url-input-section form {
+  display: flex;
+  gap: 10px;
+}
+
+.url-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.generate-btn {
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.generate-btn:hover:not(:disabled) {
+  background: var(--secondary-color);
+}
+
+.generate-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.outline-content {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  min-height: 400px;
+}
+
+.outline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.outline-header h3 {
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.copy-btn {
+  padding: 6px 12px;
+  background: none;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.copy-btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.outline-list {
+  list-style: none;
+  padding: 20px;
+  margin: 0;
+}
+
+.outline-item {
+  margin-bottom: 10px;
+}
+
+.outline-item a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.outline-item a:hover {
+  color: var(--primary-color);
+}
+
+.level-1 { margin-left: 0; }
+.level-2 { margin-left: 20px; }
+.level-3 { margin-left: 40px; }
+.level-4 { margin-left: 60px; }
+.level-5 { margin-left: 80px; }
+.level-6 { margin-left: 100px; }
+
+.placeholder {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--light-text);
+  text-align: center;
+  padding: 20px;
+}
+
+.placeholder small {
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .url-input-section form {
+    flex-direction: column;
+  }
+  
+  .generate-btn {
+    width: 100%;
+  }
+} 

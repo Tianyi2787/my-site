@@ -1,0 +1,80 @@
+.translator-tool {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.language-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.language-controls select {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 16px;
+  flex: 1;
+}
+
+.swap-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.swap-btn:hover {
+  background: var(--background-color);
+}
+
+.translation-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.input-area,
+.output-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.translate-btn {
+  padding: 10px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.translate-btn:hover:not(:disabled) {
+  background: var(--secondary-color);
+}
+
+.translate-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .translation-area {
+    grid-template-columns: 1fr;
+  }
+} 
